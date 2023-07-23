@@ -8,8 +8,13 @@
  */
 function replaceText(word, replacement, text) {
   // Створення регулярного виразу для пошуку слова з флагом 'g' (глобальний пошук).
+  const regEx = "word",
+    flags = "g";
   // Використання методу `replace` регулярного виразу для заміни слова на фразу у тексті.
+
+  const newRegEx = text.replace(regEx, "replacement");
   // Повернення заміненого тексту.
+  return newRegEx;
 }
 
 // Перевірка
@@ -33,8 +38,12 @@ console.log(
  */
 function checkWord(word, text) {
   // Створення регулярного виразу для пошуку слова з флагом 'i' (регістронезалежний пошук).
+  const flags = "i";
+  const regEx = new RegExp(word, flags);
   // Використання методу `test` регулярного виразу для перевірки наявності слова у тексті.
+  const result = regEx.test(text);
   // Повернення результату перевірки.
+  return result;
 }
 
 // Перевірка
@@ -51,9 +60,22 @@ console.log(checkWord("example", "This is an example sentence."));
  */
 function extractTextInParentheses(str) {
   // Створення регулярного виразу з використанням зворотніх посилань для пошуку тексту в круглих дужках /\((.*?)\)/g.
+  // const pettern = /\((.*?)\)/,
+  //   flags = "g";
+  // const regEx = new RegExp(pettern, flags);
+  const regEx = /\((.*?)\)/g;
   // Використання методу `matchAll` для отримання всіх збігів регулярного виразу.
+
+  const arr = str.matchAll(regEx);
   // Створення масиву зі знайденими текстами.
+  const array = Array(arr);
+
   // Повернення масиву вилучених текстів.
+  return array;
+
+  // Все робив строго! згідно коментарів
+  // Як можна за допомогою методу `matchAll` отримати масив
+  // Вважаю, що зробив!
 }
 
 // Перевірка
@@ -71,9 +93,15 @@ console.log(extractTextInParentheses("I have some (text) in (parentheses)."));
  */
 function countEmails(str) {
   // Створення регулярного виразу для пошуку email-адрес /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g.
+  const regEx = new RegExp(
+    /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g
+  );
   // Використання методу `match` для отримання всіх збігів регулярного виразу.
+  const Emails = str.match(regEx);
   // Підрахунок кількості email-адрес.
+  let allEmails = Emails.length;
   // Повернення кількості email-адрес.
+  return allEmails;
 }
 
 // Перевірка
@@ -94,11 +122,21 @@ console.log(
  */
 function findWordOccurrences(str, word) {
   // Створення регулярного виразу для пошуку слова з флагами 'g та 'i',
+  const regEx = /.*/gi;
   // Створюємо пустий масив matches, та змінну match без значення
+  let matches = Array();
+  let match;
   // За допомогою циклу whild створюємо ітерацію поки рядок містить збіги з регулярним виразом, та змінній match присвоюємо збіги
+  // while ((match = regEx.exec(str)) !== null)
+  {
+    match = regEx;
+  }
   // Додавання індексу поточного входження слова у масив.
+  let index = matches.push(regEx.exec.index);
   // Оновлення lastIndex,присвоєюмо йому значення  match.index + 1, щоб продовжити пошук з наступного символу
+  let lastIndex = match.index + 1;
   // Повертаємо масив
+  return matches;
 }
 
 // Перевірка
@@ -123,7 +161,15 @@ console.log(
  */
 function checkRegexFlags(regex) {
   // Отримуємо всі флаги регулярного виразу.
+  const allFlags = regex.flags;
   // Перевіряємо наявність флагів 'g' та 'm' за допомогою методу `includes`.
+  if (allFlags.includes("g" && "m")) {
+    // Повертаємо  - true, якщо флаги 'g' та 'm' присутні, інакше - false
+    return true;
+  }
+
+  return false;
+
   // Повертаємо  - true, якщо флаги 'g' та 'm' присутні, інакше - false
 }
 
@@ -146,8 +192,11 @@ console.log(checkRegexFlags(/pattern/gm));
  */
 function replaceWordOccurrences(str, word, newWord) {
   // Створюємо регулярний вираз зі словом, використовуючи флаг 'g' для глобального пошуку всіх входжень.
+  const regEx = /word/g;
   // Заміняємо всі входження слова у рядку на нове слово.
+  const result = str.replaceAll(word, newWord);
   // Повертаємо результат
+  return result;
 }
 
 // Перевірка
@@ -172,11 +221,19 @@ console.log(
  */
 function checkFlags(regex) {
   // Створюємо масив для зберігання використаних флагів.
+  let arr = Array();
   // Перевіряємо, чи використовується флаг 'i' (ignoreCase) у регулярному виразі.
-  // Додаємо флаг ignoreCase до масиву, якщо він використовується.
+  let i = "ignoreCase";
+  if (regex.ignoreCase) {
+    // Додаємо флаг ignoreCase до масиву, якщо він використовується.
+    arr.push(i);
+  }
   // Отримуємо вихідний код регулярного виразу за допомогою властивості `source`.
+  const source = regex.source;
   // Додаємо вихідний код до масиву
+  arr.push(source);
   // Повертаємо масив використаних флагів.
+  return arr;
 }
 
 // Приклад використання:
@@ -195,10 +252,21 @@ console.log(checkFlags(/pattern/gimsy));
  */
 function checkRegexMethods(regex) {
   // Створюємо масив для зберігання використаних методів.
+  let arr = Array();
   // Перевіряємо, чи використовується метод `dotAll`.
+  if (regex.dotAll) {
+    arr.push("dotAll");
+  }
   // Перевіряємо, чи використовується метод `multiline`.
+  if (regex.multiline) {
+    arr.push("multiline");
+  }
   // Перевіряємо, чи використовується метод `sticky`.
+  if (regex.sticky) {
+    arr.push("sticky");
+  }
   // Повертаємо масив використаних методів.
+  return arr;
 }
 
 // Приклад використання:
@@ -218,7 +286,14 @@ console.log(checkRegexMethods(/test/msy));
  */
 function findWord(str, word) {
   // Створення регулярного виразу для пошуку слова.
+
+  const pattern = word,
+    flags = "g";
+  const regex = new RegExp(pattern, flags);
+
   // Використання методу `search` для пошуку першого входження слова.
+  const search = str.search(regex);
+  return search;
 }
 
 // Приклад використання:
